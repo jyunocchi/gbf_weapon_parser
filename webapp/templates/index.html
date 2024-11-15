@@ -4,11 +4,17 @@
 <div id="dropContainer" style="border:1px solid black;height:100px;">
    Drop Here:
 </div>
-  Or upload here:
+  Or choose file here:
   <input type="file" id="fileInput" />
   <br>
- <pre id="text" style="border:1px solid black;height:300px;">Updates here!</pre>.
- <br><img id="myImg" src="{{url_for('static', filename='icon.jpg')}}" style="border:1px solid black;height:200px;">
+ <pre id="text" style="border:1px solid black;height:300px;">
+ This is a sample text and below is a sample of the "image format". 
+ Some shifts and lower qualities are expected but large quality drop or shifting may impact the result.
+ This text will be replaced by any update.
+ </pre>.
+ <img id="myImg" src="{{url_for('static', filename='tc1.png')}}" style="border:1px solid black;height:300px;">
+ <img id="myImg" src="{{url_for('static', filename='icon.jpg')}}" style="position:absolute;right:0px;bottom:0px;height:200px;">
+ </div>
 </body>
 <script>
 // dragover and dragenter events need to have 'preventDefault' called

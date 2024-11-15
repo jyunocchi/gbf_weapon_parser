@@ -46,6 +46,16 @@ This repo uses traditional image matching by splitting the image into each weapo
 - Better GUI (right now it's barebones GUI)
 - Summon / character parser for full party?
 
+The following are difficult:
+- Some opus / ultima skills 
+- Element of element-variable weapons (i.e. sky piercer (fire) or sky piercer (water)?)
+- Awakening type
+- AX when shown
+
+The following are likely not possible:
+- Some opus / ultima skills
+- Exact opus transcendence level (Currently this shows either no tc, tc<4, or tc=5)
+
 ## Other scripts
 
 - build_sift.py
