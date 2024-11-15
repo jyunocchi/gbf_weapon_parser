@@ -14,9 +14,11 @@ To run the python script (main.py) the following libraries are needed:
 
 ## Running the program
 
-Either run by python script (python main.py) or the PyInstaller precompiled binary for windows (main.exe)
-The following files are needed in the same directory. They are included in the release.
-- icon.jpg (Yes this is needed, yes you can switch to any image you want)
+Either run by python script (python main.py) if you have all the prerequisites or the PyInstaller precompiled binary for windows provided in releases (main.exe).
+TIPS: Not recommended to run exes found in the internet, you can run with [Windows Sandbox](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-overview) but will be more troublesome to move the images 
+
+The following files are needed in the same directory. They are included in the release zip.
+- icon.jpg (Yes this is needed, yes you can switch to any image you want, but why would you want that?)
 - data.json (Mostly to get a pair of Weapon ID and name, from wiki cargotables)
 - sift_db_np.npy (A precomputed SIFT database from the weapon images in the wiki)
 
