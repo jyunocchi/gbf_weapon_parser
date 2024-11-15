@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div id="dropContainer" style="border:1px solid black;height:100px;">
+   Drop Here:
+</div>
+  Or upload here:
+  <input type="file" id="fileInput" />
+  <br>
+ <pre id="text" style="border:1px solid black;height:300px;">Updates here!</pre>.
+ <br><img id="myImg" src="{{url_for('static', filename='icon.jpg')}}" style="border:1px solid black;height:200px;">
+</body>
+<script>
+// dragover and dragenter events need to have 'preventDefault' called
+// in order for the 'drop' event to register. 
+// See: https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Drag_operations#droptargets
+dropContainer = document.getElementById("dropContainer");
+fileInput = document.getElementById("fileInput");
+
+dropContainer.ondragover = dropContainer.ondragenter = function(evt) {
+	evt.preventDefault();
+};
+
+dropContainer.ondrop = function(evt) {
+	console.log("on drop")
+	fileInput.files = evt.dataTransfer.files;
+	var event = new Event('change');
+	fileInput.dispatchEvent(event);
+	
+	evt.preventDefault();
+};
+
+document.querySelector('input[type="file"]').addEventListener('change', function() {
+	console.log("input change")
+	if (this.files && this.files[0]) {
+		var img = document.querySelector('img');
+		img.onload = () => {
+		  URL.revokeObjectURL(img.src);  // no longer needed, free memory
+		}
+		img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+	  
+		const reader = new FileReader();
+		reader.onloadend = () => {
+			// Use a regex to remove data url part
+			const base64String = reader.result
+				.replace('data:', '')
+				.replace(/^.+,/, '');
+
+			console.log(base64String);
+			
+			console.log(base64String.length)
+			
+			document.getElementById('text').innerHTML = "Requesting image parse from server";
+
+			fetch('http://3.145.66.61/parse_image', {
+			method: 'POST',
+			headers: {
+			  'Accept': 'application/json',
+			  'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({'image' : base64String})
+			}).then(async (_res) => {
+				const result = await _res.json();
+				document.getElementById('text').innerHTML = ""
+				for (i = 0; i < result.length; i++)
+					document.getElementById('text').innerHTML += result[i] + "\n";
+			}).catch(error => {
+				document.getElementById('text').innerHTML = error;
+			});   
+		};
+		reader.readAsDataURL(this.files[0]);
+  }
+});
+</script>
+</html>

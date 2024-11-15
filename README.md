@@ -14,6 +14,8 @@ To run the python script (main.py) the following libraries are needed:
 
 ## Running the program
 
+A web-based app is run on AWS server [here](http://3.145.66.61/). Note that AWS app is run on free-tier and thus benchmarks shows it's about 10x slower than normal run of the program listed below, and bandwith etc. may not be consistent.
+
 Either run by python script (python main.py) if you have all the prerequisites or the PyInstaller precompiled binary for windows provided in releases (main.exe).
 TIPS: Not recommended to run exes found in the internet, you can run with [Windows Sandbox](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-overview) but will be more troublesome to move the images 
 
@@ -50,3 +52,7 @@ This repo uses traditional image matching by splitting the image into each weapo
 
 Opens data.json then opens all images in weapon_images/ID.jpg to build them into a SIFT database.
 The SIFT database is then saved as sift_db_np.npy
+
+- webapp/app.py
+
+Similar to main.py but instead of running tkinter to get GUI, it runs a Flask server to serve both POST service (to parse image) and a simple GET frontline index.html
