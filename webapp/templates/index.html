@@ -7,6 +7,7 @@
   Or choose file here:
   <input type="file" id="fileInput" />
   <br>
+  Or paste the image anywhere in the page.
  <pre id="text" style="border:1px solid black;height:300px;">
  This is a sample text and below is a sample of the "image format". 
  Some shifts and lower qualities are expected but large quality drop or shifting may impact the result.
@@ -75,6 +76,19 @@ document.querySelector('input[type="file"]').addEventListener('change', function
 			});   
 		};
 		reader.readAsDataURL(this.files[0]);
+  }
+});
+
+document.addEventListener('paste', async (e) => {
+  e.preventDefault();
+
+  for (const clipboardItem of e.clipboardData.files) {
+	console.log(clipboardItem.type);
+    if (clipboardItem.type.startsWith('image/')) {
+		fileInput.files = e.clipboardData.files;
+		var event = new Event('change');
+		fileInput.dispatchEvent(event);
+    }
   }
 });
 </script>
